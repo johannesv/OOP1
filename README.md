@@ -1,3 +1,3 @@
-OOP1
+KSP Rocket scientist tools
 ====
-This is a readme file
+This is a schoom project
