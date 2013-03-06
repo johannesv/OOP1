@@ -18,8 +18,8 @@ public class KomponendiParser {
 					  if (!strLine.substring(0,2).equals("//")) {
 						  System.out.println (strLine);
 						  if (strLine.substring(0,6).equals("name = ")) {
-							  komp = new Komponent();
-							  komp.nimi = strLine.substring(7,0);
+							  //komp = new Komponent();
+							  //komp.nimi = strLine.substring(7,0);
 						  }
 					  }
 				  }
