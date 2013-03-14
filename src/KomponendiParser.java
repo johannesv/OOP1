@@ -4,25 +4,17 @@ import java.util.Scanner;
 
 public class KomponendiParser {
 	public static void main(String args[]) {
-		//failiteed();
 		osadeKontroll();
 		KomponendiParser.KomponentNimega("liquidEngine1");
 			  
 	}
 	
-	public static String[] failiteed() {
-		File[] failid = new File("D:/KSP_win/Parts").listFiles();
-	    //showFiles(files);
-		String[] osad = new String[2];
-		for (File fail : failid) {
-			//System.out.println(fail);
-			
-		}
-		return osad;
-	}
+	
+	
+	// Loob ja tagastab antud nimega Komponent objekti (väärtused antakse kui on selle nimega objekt olemas)
 	
 	public static Komponent KomponentNimega(String nimi) {
-		Komponent komp = new Komponent("");
+		Komponent komp = new Komponent(nimi);
 		try{
 			  // Avada fail
 			  FileInputStream fstream = new FileInputStream("Parts/" + nimi + "/part.cfg");
@@ -41,8 +33,10 @@ public class KomponendiParser {
 						  //System.out.println (strLine);
 						  if (strLine.length()>= 6 && strLine.substring(0,6).equals("name =") && komp.nimi.equals("")) {
 							  komp.setNimi(strLine.substring(7));
-						  } else if (strLine.length()>= 6 && strLine.substring(0,6).equals("mass =") && komp.mass == 0.0) {
-							  komp.setMass(Float.parseFloat(strLine.substring(7)));
+						  } else if (strLine.length()>= 6 && strLine.substring(0,6).equals("mass =") && komp.tyhiMass == 0.0) {
+							  float m = Float.parseFloat(strLine.substring(7));
+							  komp.setTyhiMass(m);
+							  komp.setTaisMass(m);
 						  } else if (strLine.length()>= 12 && strLine.substring(0,12).equals("\tmaxThrust =" ) && komp.toukejoud == 0.0) {
 							  komp.setToukejoud(Float.parseFloat(strLine.substring(12)));
 						  } else if (strLine.length()>= 14 && strLine.substring(0,14).equals("maximum_drag =" ) && komp.minohutakistus == 0.0) {
@@ -64,7 +58,7 @@ public class KomponendiParser {
 	
 	
 	// On eeldatud et programm käivitatakse kaustast kuhu on paigaldatud Kerbal Space Program.
-	// Kui KSP-osade faile ei leitud, siis küsida KSP kataloogi asukohta ja sealt osade failid programmi kausta kopeerida
+	// Kui KSP-osade faile ei leitud, siis küsida KSP kataloogi asukohta ja sealt osade failid programmi kausta kopeeritakse
 	public static void osadeKontroll() {
 		File osad = new File("Parts");
 		if (osad.isDirectory()) return;

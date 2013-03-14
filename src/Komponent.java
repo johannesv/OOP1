@@ -1,19 +1,34 @@
 
 public class Komponent {
 	String nimi;
-	float mass;
+	float tyhiMass;
+	float taisMass;
+	public float getTyhiMass() {
+		return tyhiMass;
+	}
+	public void setTyhiMass(float tyhiMass) {
+		this.tyhiMass = tyhiMass;
+	}
+	public float getTaisMass() {
+		return taisMass;
+	}
+	public void setTaisMass(float taisMass) {
+		this.taisMass = taisMass;
+	}
+
 	float toukejoud;
 	float minohutakistus;
 	float maxohutakistus;
-	Komponent(String nimi, float mass, float toukejoud, float minohutakistus, float maxohutakistus){
+	Komponent(String nimi, float tyhiMass, float taisMass, float toukejoud, float minohutakistus, float maxohutakistus){
 		this.nimi = nimi;
-		this.mass = mass;
+		this.tyhiMass = tyhiMass;
+		this.taisMass = taisMass;
 		this.toukejoud = toukejoud;
 		this.minohutakistus = minohutakistus;
 		this.maxohutakistus = maxohutakistus;
 	}
 	Komponent(String nimi){
-		this(nimi, 0, 0, 0, 0);
+		this(nimi, 0, 0, 0, 0, 0);
 	}
 	void setNimi(String uusnimi){
 		this.nimi = uusnimi;
@@ -21,12 +36,7 @@ public class Komponent {
 	String getNimi(){
 		return nimi;
 	}
-	void setMass(float uusmass){
-		this.mass = uusmass;
-	}
-	float getMass(){
-		return mass;
-	}
+	
 	void setToukejoud(float touge){
 		this.toukejoud = touge;
 	}
@@ -48,7 +58,8 @@ public class Komponent {
 	
 	public String toString() {
 		return "Komponent: \nNimi: " + this.nimi +
-				"\nMass: " + this.mass +
+				"\nTühimass: " + this.tyhiMass +
+				"\nTäismass: " + this.taisMass +
 				"\nTõukejõud: " + this.toukejoud +
 				"\nMinimaalne õhutakistus: " + this.minohutakistus +
 				"\nMaksimaalne õhutakistus: " + this.maxohutakistus; 
