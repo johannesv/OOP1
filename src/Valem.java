@@ -19,7 +19,7 @@ public class Valem {
 	public static void main(String args[]) {
 		System.out.println("Kiiruse muutus 2,25 tonnisel kütusemahutil on "+deltaV((float)215,(float)250,(float)2250)+" m/s");
 		System.out.println("Kiiruse muutus 100 km-lt 200 km-le on "+radiusShiftV(100, 200)+" m/s");
-		System.out.println("Kiirus 100 km orbiidil on "+OrbitV(100)+ " m/s");
+		System.out.println("Kiirus 100 km orbiidil on "+OrbitV(100)+ " m/s ");
 		System.out.println("Kiirus 200 km orbiidil on "+OrbitV(200)+ " m/s");
 	}
 	

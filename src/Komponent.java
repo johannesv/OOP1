@@ -3,15 +3,17 @@ public class Komponent {
 	String nimi;
 	float mass;
 	float toukejoud;
-	float ohutakistus;
-	Komponent(String nimi, float mass, float toukejoud, float ohutakistus){
+	float minohutakistus;
+	float maxohutakistus;
+	Komponent(String nimi, float mass, float toukejoud, float minohutakistus, float maxohutakistus){
 		this.nimi = nimi;
 		this.mass = mass;
 		this.toukejoud = toukejoud;
-		this.ohutakistus = ohutakistus;
+		this.minohutakistus = minohutakistus;
+		this.maxohutakistus = maxohutakistus;
 	}
 	Komponent(String nimi){
-		this(nimi, 0, 0, 0);
+		this(nimi, 0, 0, 0, 0);
 	}
 	void setNimi(String uusnimi){
 		this.nimi = uusnimi;
@@ -31,11 +33,25 @@ public class Komponent {
 	float getToukejoud(){
 		return toukejoud;
 	}
-	void setTakistus(float takistus){
-		this.ohutakistus = takistus;
+	public float getMinohutakistus() {
+		return minohutakistus;
 	}
-	float getTakistus(){
-		return ohutakistus;
+	public void setMinohutakistus(float minohutakistus) {
+		this.minohutakistus = minohutakistus;
+	}
+	public float getMaxohutakistus() {
+		return maxohutakistus;
+	}
+	public void setMaxohutakistus(float maxohutakistus) {
+		this.maxohutakistus = maxohutakistus;
 	}
 	
+	public String toString() {
+		return "Komponent: \nNimi: " + this.nimi +
+				"\nMass: " + this.mass +
+				"\nTõukejõud: " + this.toukejoud +
+				"\nMinimaalne õhutakistus: " + this.minohutakistus +
+				"\nMaksimaalne õhutakistus: " + this.maxohutakistus; 
+		
+	}
 }

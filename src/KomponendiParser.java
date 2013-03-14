@@ -1,41 +1,12 @@
 import java.io.*;
 import java.util.Scanner;
-import static java.nio.file.StandardCopyOption.*;
 
 
 public class KomponendiParser {
 	public static void main(String args[]) {
 		//failiteed();
 		osadeKontroll();
-		Komponent komp;
-		try{
-			  // Open the file that is the first 
-			  // command line parameter
-			  FileInputStream fstream = new FileInputStream("part.cfg");
-			  // Get the object of DataInputStream
-			  DataInputStream in = new DataInputStream(fstream);
-			  BufferedReader br = new BufferedReader(new InputStreamReader(in));
-			  String strLine;
-			  //Read File Line By Line
-			  while ((strLine = br.readLine()) != null)   {
-			  // Print the content on the console
-				  if (strLine.length()>= 2) {
-					  if (!strLine.substring(0,2).equals("//")) {
-						  //System.out.println (strLine);
-						  if (strLine.substring(0,6).equals("name = ")) {
-							  //komp = new Komponent();
-							  //komp.nimi = strLine.substring(7,0);
-						  }
-					  }
-				  }
-				  
-			  
-			  }
-			  //Close the input stream
-			  in.close();
-			    }catch (Exception e){//Catch exception if any
-			  System.err.println("Error: " + e.getMessage());
-			  }
+		KomponendiParser.KomponentNimega("liquidEngine1");
 			  
 	}
 	
@@ -50,6 +21,47 @@ public class KomponendiParser {
 		return osad;
 	}
 	
+	public static Komponent KomponentNimega(String nimi) {
+		Komponent komp = new Komponent("");
+		try{
+			  // Avada fail
+			  FileInputStream fstream = new FileInputStream("Parts/" + nimi + "/part.cfg");
+			  
+			  //  DataInputStream objekt
+			  DataInputStream in = new DataInputStream(fstream);
+			  BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			  String strLine;
+			  
+			  //Lugeda reakaupa
+			  while ((strLine = br.readLine()) != null)   {
+				  
+			  // Komponendile õiged väärtused
+				  if (strLine.length()>= 2) {
+					  if (!strLine.substring(0,2).equals("//")) {
+						  //System.out.println (strLine);
+						  if (strLine.length()>= 6 && strLine.substring(0,6).equals("name =") && komp.nimi.equals("")) {
+							  komp.setNimi(strLine.substring(7));
+						  } else if (strLine.length()>= 6 && strLine.substring(0,6).equals("mass =") && komp.mass == 0.0) {
+							  komp.setMass(Float.parseFloat(strLine.substring(7)));
+						  } else if (strLine.length()>= 12 && strLine.substring(0,12).equals("\tmaxThrust =" ) && komp.toukejoud == 0.0) {
+							  komp.setToukejoud(Float.parseFloat(strLine.substring(12)));
+						  } else if (strLine.length()>= 14 && strLine.substring(0,14).equals("maximum_drag =" ) && komp.minohutakistus == 0.0) {
+							  komp.setMinohutakistus(Float.parseFloat(strLine.substring(14)));
+						  } else if (strLine.length()>= 14 && strLine.substring(0,14).equals("minimum_drag =" ) && komp.maxohutakistus == 0.0) {
+							  komp.setMaxohutakistus(Float.parseFloat(strLine.substring(14)));
+						  }
+					  }
+				  }
+			  }
+			  //System.out.println(komp);
+			  //Close the input stream
+			  in.close();
+			    }catch (Exception e){//Catch exception if any
+			  System.err.println("Error: " + e.getMessage());
+			  }
+		return komp;
+	}
+	
 	
 	// On eeldatud et programm käivitatakse kaustast kuhu on paigaldatud Kerbal Space Program.
 	// Kui KSP-osade faile ei leitud, siis küsida KSP kataloogi asukohta ja sealt osade failid programmi kausta kopeerida
@@ -57,14 +69,14 @@ public class KomponendiParser {
 		File osad = new File("Parts");
 		if (osad.isDirectory()) return;
 		
-		 //Scanner scan = new Scanner(System.in);
+		 Scanner scan = new Scanner(System.in);
 
-		  //System.out.println("Sisesta KSP baaskausta aukoht(D:/KSP_win):");
+		  System.out.println("Sisesta KSP baaskausta aukoht:");
 
-		  //String asukoht = scan.next();
+		  String asukoht1 = scan.next();
 		  
-		  //osad = new File(asukoht + "/Parts");
-			osad = new File("D:/KSP_win/Parts");
+		  osad = new File(asukoht1 + "/Parts");
+			//osad = new File("D:/KSP_win/Parts");
 			
 		  if (osad.isDirectory()) {
 			  String asukoht = "Parts";
@@ -79,14 +91,7 @@ public class KomponendiParser {
 				  File uusFail = new File(uusOsa.getPath()+"/part.cfg");
 				  
 				  File partFail = new File(kaust.getPath()+"/part.cfg");
-				  
-				  
-				  //System.out.println(partFail);
-				  
-				  
-				  //copyFileToDirectory(partFail, uusOsa);
-				  
-				  //FileUtils.copyFile();
+
 				  
 				  try {
 					InputStream sisse = new FileInputStream(partFail);
@@ -111,6 +116,5 @@ public class KomponendiParser {
 			  }
 			  
 		  }
-		//System.out.println("Exists " + osad.isDirectory());
 	}
 }
