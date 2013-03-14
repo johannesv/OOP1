@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class KomponendiParser {
 	public static void main(String args[]) {
 		osadeKontroll();
-		KomponendiParser.KomponentNimega("fuelTank");
+		//KomponendiParser.KomponentNimega("fuelTank");
 			  
 	}
 	
@@ -30,7 +30,7 @@ public class KomponendiParser {
 			  // Komponendile õiged väärtused
 				  if (strLine.length()>= 2) {
 					  if (!strLine.substring(0,2).equals("//")) {
-						  System.out.println (strLine);
+						  //System.out.println (strLine);
 						  if (strLine.length()>= 6 && strLine.substring(0,6).equals("name =") && komp.nimi.equals("")) {
 							  komp.setNimi(strLine.substring(7));
 						  } else if (strLine.length()>= 6 && strLine.substring(0,6).equals("mass =") && komp.tyhiMass == 0.0) {
@@ -47,21 +47,15 @@ public class KomponendiParser {
 							  strLine = br.readLine();
 							  float m = komp.getTaisMass() + (Float.parseFloat(strLine.substring(9))/200);
 							  komp.setTaisMass(m);
-							  
-							  
-							  System.out.println("LIQUIDNITROGEN TIME"+m);
 						  } else if (strLine.length()== 18 && strLine.substring(0,18).equals(" name = LiquidFuel" )) {
 							  strLine = br.readLine();
 							  float m = komp.getTaisMass() + (Float.parseFloat(strLine.substring(9))/200);
 							  komp.setTaisMass(m);
-							  
-							  
-							  System.out.println("LIQUIDNITROGEN TIME"+m);
 						  }
 					  }
 				  }
 			  }
-			  System.out.println(komp);
+			  //System.out.println(komp);
 			  //Close the input stream
 			  in.close();
 			    }catch (Exception e){//Catch exception if any
